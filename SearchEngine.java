@@ -10,10 +10,7 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.w3c.dom.*;
@@ -42,10 +39,10 @@ public class SearchEngine {
 	private static int counter; // Used only to export the first "hitsPerPage" results in the text file.
 
 	// Variables that will be accessed by the GUI class!
-	private static String queriesFilePath; //= "C:\\Download\\@Kalampoukis\\SearchEngine\\src\\search_engine_package\\Queries.xml";
-	private static float titleWeight = (float) 0.5;
+	private static String queriesFilePath;
+	private static float titleWeight = (float) 1.5;
 	private static float objectiveWeight = (float) 0.5;
-	private static float callWeight = (float) 30.0;
+	private static float callWeight = (float) 100.0;
 	private static boolean readyToSearch = false; // If the indexing is done set true.
 
 	public static void main(String[] args) throws IOException, ParseException {
@@ -57,7 +54,8 @@ public class SearchEngine {
 		workingDirectory = System.getProperty("user.dir"); // Get current working directory.
 		String path = workingDirectory+"\\Parsed files\\";
 		System.out.println("Working directory: " + workingDirectory);
-		queriesFilePath = workingDirectory;//+"\\src\\search_engine_package\\Queries.xml"; // ***CHANGE!!!!!!!!!!!***
+		queriesFilePath = workingDirectory+"\\src\\search_engine_package\\Queries.xml";
+
 		File directory = new File(path); // The directory containing all the xml files.
 		File[] fileList = directory.listFiles(); // A list with all the xml files.
 		System.out.println("Number of files in folder: "+fileList.length);
@@ -67,6 +65,12 @@ public class SearchEngine {
 		index = new RAMDirectory(); // Create the index in RAM.
 		IndexWriterConfig config = new IndexWriterConfig(analyzer);
 		w = new IndexWriter(index, config);
+
+		/* Set the maximum limit of clauses in a BooleanQuery.
+		"A Query that matches documents matching boolean combinations of other queries."
+		This kind of query is not explicitly used here, but I double its limit just in case.
+		If there is a clause limit problem, there will be an exception thrown.*/
+		BooleanQuery.setMaxClauseCount(2048); // Double the limit (1024 by default).
 
 		for (File file : fileList) { // For every file in the directory.
 
@@ -261,7 +265,7 @@ public class SearchEngine {
 			String identifier; // Variable to store the identifier from the Queries.xml file.
 			int identifierHit; // If the identifier is the searched one, then the value is 1. Otherwise it is 0.
 
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter() {
 				new FileOutputStream(workingDirectory +"\\@RESULTS.txt"), "utf-8"))) {
 
 				writer.write("Query weights:\n");
@@ -308,10 +312,10 @@ public class SearchEngine {
 						identifierHit = 0;
 						Document d = searcher.doc(key);
 
-						if (d.get("identifier").equals(identifier)) {
+						if (d.get("identifier").equalsIgnoreCase(identifier)) {
 
 							identifierHit = 1; // If the identifier is the same with the one searched for.
-
+							System.out.println("IDENTIFIER  HIT");
 						}
 
 						calculateScore(key, titleWeight, objectiveWeight, callWeight, identifierHit, searcher);
