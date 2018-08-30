@@ -21,9 +21,9 @@ import javax.swing.plaf.basic.BasicLookAndFeel;
 public class GUI extends JFrame {
 
 	// Variables to be passed to the main method of the application.
-	public float titleWeight = (float) 0.5; // Default value.
+	public float titleWeight = (float) 1.5; // Default value.
 	public float objectiveWeight = (float) 0.5; // Default value.
-	public float callWeight = (float) 30.0; // Default value.
+	public float callWeight = (float) 100.0; // Default value.
 	public String workingDirectory = System.getProperty("user.dir");
 	public String queriesFilePath = workingDirectory+"\\Queries.xml"; // Default path.
 
@@ -197,7 +197,7 @@ public class GUI extends JFrame {
 				contentPanel.add(titleLabel, CC.xywh(1, 3, 2, 1, CC.CENTER, CC.DEFAULT));
 
 				//---- titleWeightField ----
-				titleWeightField.setText("0.5");
+				titleWeightField.setText("1.5");
 				titleWeightField.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusLost(FocusEvent e) {
@@ -225,7 +225,7 @@ public class GUI extends JFrame {
 				contentPanel.add(categoryLabel, CC.xywh(1, 7, 2, 1, CC.CENTER, CC.DEFAULT));
 
 				//---- categoryWeightField ----
-				categoryWeightField.setText("30.0");
+				categoryWeightField.setText("100.0");
 				categoryWeightField.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusLost(FocusEvent e) {
