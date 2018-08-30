@@ -77,7 +77,6 @@ def main():
 
 								projectObjective = True
 
-
 							else:
 
 								projectObjective = False
@@ -100,23 +99,9 @@ def main():
 
 									categoriesFlag = True
 
-
-
-								#elif (not "</relations>" in line and categoriesFlag is True):
-									#CATEGORIES if ("<code>") in line:
-									# 	targetFile.write(line)
-								# </relations> tag is the next tag after the <categories> tag, that we are looking for.
-								# The above elif statement checks if we are still in the <categories> tag and if the
-								# <categories> tag is the right one, because it can be found in various locations.
-
 								else: # In any other case.
 
 									categoriesFlag = False
-
-						# The coordinator type in the organization tag might span over multiple lines!
-						#elif "<legalName>"in line:
-
-						#	targetFile.write(line)
 
 						elif "<identifier>" in line:
 
