@@ -2,17 +2,18 @@ import os
 import glob
 import fnmatch
 from io import open # For Linux support.
+import re
+
 
 def main():
 
 	print("Starting parser...\n")
-
 	currentDirectory = os.path.dirname(os.path.realpath(__file__)) # Store the current location of the script.
 
 	print("Current directory: " + currentDirectory)
 
 	outputPath = os.path.join(currentDirectory, "Parsed files")
-  
+
 	if not os.path.exists(outputPath): #Create the output folder for the new xml files if it doesn't already exist.
 
 		os.makedirs(outputPath)
@@ -41,6 +42,7 @@ def main():
 
 				with open(full_path, "w+", encoding='utf8') as targetFile: # Open for write or create the output file.
 
+					#targetFile.readline() # Skip the first line of the xml file (header).
 					targetFile.write(sourceFile.readline()) # Copy the header of the xml.
 					targetFile.write(sourceFile.readline())  # Copy the project tag.
 
@@ -98,13 +100,29 @@ def main():
 
 									categoriesFlag = True
 
+
+
+								#elif (not "</relations>" in line and categoriesFlag is True):
+									#CATEGORIES if ("<code>") in line:
+									# 	targetFile.write(line)
+								# </relations> tag is the next tag after the <categories> tag, that we are looking for.
+								# The above elif statement checks if we are still in the <categories> tag and if the
+								# <categories> tag is the right one, because it can be found in various locations.
+
 								else: # In any other case.
 
 									categoriesFlag = False
 
+						# The coordinator type in the organization tag might span over multiple lines!
+						#elif "<legalName>"in line:
+
+						#	targetFile.write(line)
+
 						elif "<identifier>" in line:
 
-							targetFile.write(line)
+							line = line.strip() # Remove empty spaces.
+							cleanLine = re.sub('[,\.!?_-]', '', line) # Remove the spefial characters.
+							targetFile.write(cleanLine+'\n') # Write the "cleaned" line to the target file.
 
 						elif "</project>" in line:
 							targetFile.write(line)
