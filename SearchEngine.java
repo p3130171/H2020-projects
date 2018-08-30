@@ -54,7 +54,7 @@ public class SearchEngine {
 		workingDirectory = System.getProperty("user.dir"); // Get current working directory.
 		String path = workingDirectory+"\\Parsed files\\";
 		System.out.println("Working directory: " + workingDirectory);
-		queriesFilePath = workingDirectory+"\\src\\search_engine_package\\Queries.xml";
+		queriesFilePath = workingDirectory;
 
 		File directory = new File(path); // The directory containing all the xml files.
 		File[] fileList = directory.listFiles(); // A list with all the xml files.
