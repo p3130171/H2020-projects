@@ -1,0 +1,125 @@
+* {box-sizing: border-box;}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+.vp-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.topnav {
+    overflow: hidden;
+    /*background-color: #e9e9e9;*/
+	background-color: lightslategray;
+    box-shadow: 5px -3px 11px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	z-index: 1;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #F5F5F5;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+	cursor: pointer;
+}
+
+.topnav a.active {
+    background-color: #2196F3;
+    color: #FFD23F;
+}
+
+.topnav .search-container {
+    float: right;
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+	width: 100px;/*NEW*/
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.topnav input[type=text]:focus {
+    width: 200px;
+	margin-right: 0px;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 0px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+	margin-right: 10px;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}
+
+#home-fragment {
+    height: 100%;
+	flex-direction: column; /*NEW*/
+    display: flex;
+}
+
+#about-fragment {
+    height: 100%;
+    display: flex;
+}
+
+#about-contents {
+    padding: 4px;
+}
+
+.lsplit {
+    flex: 0.65;
+	background-color: steelblue;
+	/* cadetblue, lightseagreen, steelblue */
+}
+
+.rsplit {
+    flex: 0.35;
+    padding: 12px;
+    overflow-x: scroll;
+    border-top-style: solid;
+    border-color: #777777;
+	background-color: lightslategray;
+}
+
+#details {
+	
+	color: #f5f5f5;
+}
+
+.node text {
+	/* font: 16px spectral; */
+	text-shadow:-1px 0px #0c0000, 0px 0px #333, -1px -1px 0px #333, -1px -1px 5px #333;
+}
+
+pre { /* Used to wrap the objective text in new lines.*/
+    
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+	

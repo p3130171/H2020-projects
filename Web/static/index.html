@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Cordis Projects Graph</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+     -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/alchemyjs/0.4.2/styles/vendor.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/alchemyjs/0.4.2/alchemy.min.css" />
+    <link rel="stylesheet" href="static/custom.css" />
+	<link rel="icon" type="image/png" href="static/favicon.png" sizes="32x32"> 
+
+    <!-- Scripts
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alchemyjs/0.4.2/scripts/vendor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alchemyjs/0.4.2/alchemy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
+    <script src="static/renderjson.js"></script>
+    <script src="static/main.js"></script>
+</head>
+<body>
+    <div class="vp-container">
+        <div class="topnav">
+            <a class="active" id="home-btn">Home</a>
+            <a id="about-btn">About</a>
+            <div class="search-container">
+                <form action="/">
+					<button><i class="fa fa-search"></i></button>
+                    <input type="text" placeholder="Search..." name="query">
+                </form>
+            </div>
+        </div>
+        <div id="home-fragment">
+            <div class="lsplit alchemy" id="alchemy"></div>
+            <div class="rsplit">
+                <h2 id="details">Details</h2>
+				<p>
+					<div id="details-container"></div>
+				</p>	
+            </div>
+        </div>
+        <div id="about-fragment" style="display:none">
+            <div id="about-contents"></div>
+        </div>
+    </div>
+</body>
+</html>
